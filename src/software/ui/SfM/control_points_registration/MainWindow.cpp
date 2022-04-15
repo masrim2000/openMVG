@@ -405,7 +405,8 @@ void MainWindow::registerProject()
 
 MainWindow::MainWindow
 (
-  QWidget * parent
+  QWidget * parent,
+  std::string sSfM_Data_Filename_In
 ): QMainWindow()
 {
   createPanel();
@@ -417,6 +418,7 @@ MainWindow::MainWindow
 
   QMainWindow::statusBar()->showMessage("Welcome in Control_point_editor GUI.");
   resize(640, 480);
+  std::cout << sSfM_Data_Filename_In;
   openProject("/home/mas/openMVG/data/0/out/reconstruction_sequential/sfm_data_cp_added.json");
   registerProject();
   saveProject("/home/mas/openMVG/data/0/out/reconstruction_sequential/sfm_data_cp_added_atuoRegistered.json");

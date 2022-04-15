@@ -8,12 +8,38 @@
 
 #include <QApplication>
 #include "MainWindow.hpp"
+#include "third_party/cmdLine/cmdLine.h"
+
+#include <QFileDialog>
+#include <QGridLayout>
+#include <QMenuBar>
+#include <QDebug>
+#include <QMenu>
+#include <QMessageBox>
+#include <QSplitter>
+#include <QStatusBar>
+#include <QtGui>
+#include <QWidget>
+
 
 int main(int argc, char ** argv)
 {
+
+CmdLine cmd;
+
+  std::string
+    sSfM_Data_Filename_In,
+    sOutputPLY_Out;
+
+  
+  cmd.add(make_option('i', sSfM_Data_Filename_In, "input_file"));
+  cmd.add(make_option('o', sOutputPLY_Out, "output_file"));
+
+  std::cout << sSfM_Data_Filename_In;
+
   QApplication app(argc, argv);
 
-  MainWindow * mainWindow = new MainWindow;
+  MainWindow * mainWindow = new MainWindow(0,sSfM_Data_Filename_In);
   mainWindow->show();
 
   return app.exec();
