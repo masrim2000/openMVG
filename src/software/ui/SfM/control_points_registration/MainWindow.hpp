@@ -61,10 +61,10 @@ private:
   void doubleClickImageList();
 
   /// Save the SfM_Data scene (perhaps updated with GCP data)
-  void saveProject();
+  void saveProject(const QString fileName);
 
   /// Open a SfM_Data scene
-  void openProject();
+  void openProject(const QString fileName);
 
   /// Display the GUI that allow to edit 3D GCP positions
   void editControlPoints();

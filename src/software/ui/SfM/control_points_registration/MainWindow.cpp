@@ -102,11 +102,12 @@ void MainWindow::doubleClickImageList()
   }
 }
 
-void MainWindow::saveProject()
+void MainWindow::saveProject(const QString fileName)
 {
-  const QString dir = QString::fromStdString(stlplus::folder_part(m_sfm_data_filename));
-  const QString sfm_data_filename = QFileDialog::getSaveFileName(this, tr("Choose a sfm_data file (sfm_data.json)"),
-    dir, tr("sfm_data (*.json *.xml *.bin)"));
+  // const QString dir = QString::fromStdString(stlplus::folder_part(m_sfm_data_filename));
+  // const QString sfm_data_filename = QFileDialog::getSaveFileName(this, tr("Choose a sfm_data file (sfm_data.json)"),
+  //   dir, tr("sfm_data (*.json *.xml *.bin)"));
+  const QString sfm_data_filename = fileName;
   if (sfm_data_filename.isEmpty())
     return;
 
@@ -119,14 +120,16 @@ void MainWindow::saveProject()
   }
 }
 
-void MainWindow::openProject()
+void MainWindow::openProject(const QString fileName)
 {
-  const QString sfm_data_fileName = QFileDialog::getOpenFileName(this, tr("Choose a sfm_data project file"),
-    QString::null, tr("sfm_data (*.json *.xml *.bin)"));
+  // const QString sfm_data_fileName = QFileDialog::getOpenFileName(this, tr("Choose a sfm_data project file"),
+  //   QString::null, tr("sfm_data (*.json *.xml *.bin)"));
+  const QString sfm_data_fileName = fileName;
   if (sfm_data_fileName.isEmpty())
     return;
 
   m_sfm_data_filename = sfm_data_fileName.toStdString();
+  // std::cout << m_sfm_data_filename;
 
   if (m_doc.loadData(sfm_data_fileName.toStdString()))
   {
@@ -206,6 +209,7 @@ static std::string string_pattern_replace
 
 void MainWindow::registerProject()
 {
+  // std::cout << std::to_string(m_doc._sfm_data.GetViews().View().view_id); std::cout << '\n';
   if (m_doc._sfm_data.control_points.size() < 3)
   {
     QMessageBox msgBox;
@@ -413,6 +417,9 @@ MainWindow::MainWindow
 
   QMainWindow::statusBar()->showMessage("Welcome in Control_point_editor GUI.");
   resize(640, 480);
+  openProject("/home/mas/openMVG/data/0/out/reconstruction_sequential/sfm_data_cp_added.json");
+  registerProject();
+  saveProject("/home/mas/openMVG/data/0/out/reconstruction_sequential/sfm_data_cp_added_atuoRegistered.json");
 }
 
 void MainWindow::createPanel()
