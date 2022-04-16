@@ -75,7 +75,7 @@ private:
 public:
 
   /// Constructor
-  MainWindow(QWidget * parent = 0, std::string sSfM_Data_Filename_In = "");
+  MainWindow(QWidget * parent = 0, std::string sSfM_Data_Filename_In = "", std::string sOutputPLY_Out = "");
 
   /* Create the Window layout (shape panels & co.)
   |____________________________

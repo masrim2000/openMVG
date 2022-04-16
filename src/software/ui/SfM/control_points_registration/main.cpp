@@ -24,22 +24,22 @@
 
 int main(int argc, char ** argv)
 {
-
-CmdLine cmd;
+// CmdLine cmd;
 
   std::string
     sSfM_Data_Filename_In,
     sOutputPLY_Out;
-
   
-  cmd.add(make_option('i', sSfM_Data_Filename_In, "input_file"));
-  cmd.add(make_option('o', sOutputPLY_Out, "output_file"));
+  // cmd.add(make_option('i', sSfM_Data_Filename_In, "input_file"));
+  // cmd.add(make_option('o', sOutputPLY_Out, "output_file"));
 
-  std::cout << sSfM_Data_Filename_In;
+// ./ui_openMVG_control_points_registration /path/to/input/sfm_data.json /path/to/output/sfm_data_registered.json
+  sSfM_Data_Filename_In = argv[1];
+  sOutputPLY_Out = argv[2];
 
   QApplication app(argc, argv);
 
-  MainWindow * mainWindow = new MainWindow(0,sSfM_Data_Filename_In);
+  MainWindow * mainWindow = new MainWindow(0, sSfM_Data_Filename_In, sOutputPLY_Out);
   mainWindow->show();
 
   return app.exec();

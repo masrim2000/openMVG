@@ -365,9 +365,9 @@ void MainWindow::registerProject()
       }
       std::cout << os.str();
 
-      QMessageBox msgBox;
-      msgBox.setText(QString::fromStdString(string_pattern_replace(os.str(), "\n", "<br>")));
-      msgBox.exec();
+      // QMessageBox msgBox;
+      // msgBox.setText(QString::fromStdString(string_pattern_replace(os.str(), "\n", "<br>")));
+      // msgBox.exec();
     }
     else
     {
@@ -406,7 +406,8 @@ void MainWindow::registerProject()
 MainWindow::MainWindow
 (
   QWidget * parent,
-  std::string sSfM_Data_Filename_In
+  std::string sSfM_Data_Filename_In,
+  std::string sOutputPLY_Out
 ): QMainWindow()
 {
   createPanel();
@@ -418,10 +419,15 @@ MainWindow::MainWindow
 
   QMainWindow::statusBar()->showMessage("Welcome in Control_point_editor GUI.");
   resize(640, 480);
-  std::cout << sSfM_Data_Filename_In;
-  openProject("/home/mas/openMVG/data/0/out/reconstruction_sequential/sfm_data_cp_added.json");
+
+  // std::cout << "Input: " << sSfM_Data_Filename_In << "\nOutput: " << sOutputPLY_Out << "\n";
+
+  openProject(QString::fromStdString(sSfM_Data_Filename_In));
   registerProject();
-  saveProject("/home/mas/openMVG/data/0/out/reconstruction_sequential/sfm_data_cp_added_atuoRegistered.json");
+  saveProject(QString::fromStdString(sOutputPLY_Out));
+
+  this->setAttribute(Qt::WA_DeleteOnClose);
+  MainWindow::close();
 }
 
 void MainWindow::createPanel()
